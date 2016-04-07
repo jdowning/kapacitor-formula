@@ -1,0 +1,24 @@
+{% import_yaml "kapacitor/defaults.yaml" as default_settings %}
+
+{% set os_map = salt['grains.filter_by']({
+    'Debian': {
+      'pkgsuffix': '_amd64.deb',
+      'source_hash': 'a74a7a20a67fd7f061c3179061250b17',
+    },
+    'RedHat': {
+      'pkgsuffix': '.x86_64.rpm',
+      'source_hash': '40fcb87d0a5517d06f22a8dd0d3a2b83',
+    }
+  }
+  , grain="os_family"
+  , merge=salt['pillar.get']('kapacitor:lookup'))
+%}
+
+{% do default_settings.kapacitor.update(os_map) %}
+
+{% set kapacitor = salt['pillar.get'](
+    'kapacitor',
+    default=default_settings.kapacitor,
+    merge=True
+  )
+%}

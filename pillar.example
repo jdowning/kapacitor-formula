@@ -1,0 +1,5 @@
+kapacitor:
+  config:
+    hostname: foobar
+    http:
+      write_tracing: "true"
