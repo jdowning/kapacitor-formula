@@ -1,13 +1,5 @@
 kapacitor:
+  indent: 2
   version: 0.12.0-1
-  config:
-    hostname: "localhost"
-    data_dir: "/var/lib/kapacitor"
-    http:
-      bind_address: ":9092"
-      auth_enabled: "false"
-      log_enabled: "true"
-      write_tracing: "false"
-      pprof_enabled: "false"
-      https_enabled: "false"
-      https_certificate: "/etc/ssl/kapacitor.pem"
+  hostname: "localhost"
+  data_dir: "/var/lib/kapacitor"

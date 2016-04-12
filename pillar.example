@@ -1,5 +1,15 @@
 kapacitor:
+  hostname: foobar
   config:
-    hostname: foobar
-    http:
-      write_tracing: "true"
+    -
+      table_name: http
+      write_tracing: true
+    -
+      table_name: deadman
+      global: true
+  influxdb:
+    -
+      name: influxdb
+      default: true
+      urls:
+        - "http://localhost:8086"

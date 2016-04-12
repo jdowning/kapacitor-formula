@@ -22,3 +22,55 @@
     merge=True
   )
 %}
+
+{%- macro output_indented(col, string) %}
+{{ string|indent(col, true) -}}
+{%- endmacro %}
+
+{% macro format_kapacitor_config(table_array) %}
+{%- set col = 0 %}
+{%- for table in table_array %}
+  {{- output_indented(col, ("[" + table.table_name + "]")) }}
+  {%- set col = col + kapacitor.indent %}
+  {%- for key, value in table.items() %}
+    {%- if key == "table_name" %} {#skip table_name#}
+    {%- elif value is sameas false or value is sameas true or value is number %} {#boolean or integers#}
+      {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
+    {%- elif value is string or value is number %} {#strings#}
+      {{- output_indented(col, (key + ' = "' + value|string + '"')) }}
+    {%- elif value is iterable %} {#arrays#}
+      {{- output_indented(col, key + ' = [') -}}
+      {%- for item in value -%}
+        "{{ item }}"{%- if loop.last == false -%},{%- endif -%}
+      {%- endfor -%}
+      ]
+    {%- endif %}
+  {%- endfor %}
+{#line break#}
+  {%- set col = col - kapacitor.indent %}
+{%- endfor %}
+{%- endmacro %}
+
+{% macro format_influxdb_config(influxdb_array) %}
+{%- set col = 0 %}
+{%- for config in influxdb_array %}
+  {{- output_indented(col, ("[[influxdb]]")) }}
+  {%- set col = col + kapacitor.indent %}
+  {%- for key, value in config.items() %}
+    {%- if key == "table_name" %} {#skip table_name#}
+    {%- elif value is sameas false or value is sameas true or value is number %} {#boolean or integers#}
+      {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
+    {%- elif value is string or value is number %} {#strings#}
+      {{- output_indented(col, (key + ' = "' + value|string + '"')) }}
+    {%- elif value is iterable %} {#arrays#}
+      {{- output_indented(col, key + ' = [') -}}
+      {%- for item in value -%}
+        "{{ item }}"{%- if loop.last == false -%},{%- endif -%}
+      {%- endfor -%}
+      ]
+    {%- endif %}
+  {%- endfor %}
+{#line break#}
+  {%- set col = col - kapacitor.indent %}
+{%- endfor %}
+{%- endmacro %}
