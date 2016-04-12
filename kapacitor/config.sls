@@ -4,8 +4,8 @@ kapacitor-config:
   file.managed:
     - name: /etc/kapacitor/kapacitor.conf
     - source: salt://kapacitor/files/kapacitor.conf
-    - user: root
-    - group: root
+    - user: kapacitor
+    - group: kapacitor
     - mode: 644
     - context:
         kapacitor: {{ kapacitor }}
