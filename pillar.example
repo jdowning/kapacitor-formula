@@ -13,3 +13,11 @@ kapacitor:
       default: true
       urls:
         - "http://localhost:8086"
+      subscriptions:
+        - telegraf:
+          - default
+          - longterm
+      excluded-subscriptions:
+        - foodb:
+          - ignore_this
+          - and_this_one

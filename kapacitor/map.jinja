@@ -57,7 +57,18 @@
   {{- output_indented(col, ("[[influxdb]]")) }}
   {%- set col = col + kapacitor.indent %}
   {%- for key, value in config.items() %}
-    {%- if key == "table_name" %} {#skip table_name#}
+    {%- if key == "subscriptions" or key == "excluded-subscriptions" %}
+      {{- output_indented(col, ("[influxdb." + key + "]")) }}
+      {%- for db in value %}
+        {%- set col = col + kapacitor.indent %}
+        {%- for key, value in db.items() %}
+          {{- output_indented(col, key + ' = [') -}}
+          {%- for item in value -%}
+            "{{ item }}"{%- if loop.last == false -%},{%- endif -%}
+          {%- endfor -%}
+          ]
+        {%- endfor -%}
+      {%- endfor -%}
     {%- elif value is sameas false or value is sameas true or value is number %} {#boolean or integers#}
       {{- output_indented(col, (key + ' = ' + value|string|lower)) }}
     {%- elif value is string or value is number %} {#strings#}
