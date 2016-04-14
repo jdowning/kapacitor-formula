@@ -6,6 +6,7 @@ kapacitor:
   influxdb:
     -
       name: influxdb
+      enabled: true
       default: true
       urls:
         - "http://localhost:8086"
