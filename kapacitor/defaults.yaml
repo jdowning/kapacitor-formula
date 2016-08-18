@@ -1,6 +1,6 @@
 kapacitor:
   indent: 2
-  version: 0.12.0-1
+  version: 0.13.1
   hostname: "localhost"
   data_dir: "/var/lib/kapacitor"
   influxdb:

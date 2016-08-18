@@ -1,4 +1,6 @@
 kapacitor:
+  version: 0.13.1
+  source_hash: c3d26ff4ed6464702e750426b4804133
   hostname: foobar
   config:
     -

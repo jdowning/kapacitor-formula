@@ -3,7 +3,7 @@
 kapacitor-pkg:
   file.managed:
     - name: /tmp/kapacitor_{{ kapacitor.version }}{{ kapacitor.pkgsuffix }}
-    - source: https://s3.amazonaws.com/kapacitor/kapacitor_{{ kapacitor.version }}{{ kapacitor.pkgsuffix }}
+    - source: https://dl.influxdata.com/kapacitor/releases/kapacitor_{{ kapacitor.version }}{{ kapacitor.pkgsuffix }}
     - source_hash: md5={{ kapacitor.source_hash }}
     - unless: test -f /tmp/kapacitor_{{ kapacitor.version }}{{ kapacitor.pkgsuffix }}
 
