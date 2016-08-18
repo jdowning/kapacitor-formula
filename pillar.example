@@ -1,5 +1,10 @@
 kapacitor:
   hostname: foobar
+  pkg_uri: https://dl.influxdata.com/kapacitor/releases/
+  pkg_name: "kapacitor-"
+  version: 0.13.1
+  source_hash: c3d26ff4ed6464702e750426b4804133
+
   config:
     -
       table_name: http
