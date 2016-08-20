@@ -3,10 +3,12 @@
 {% set os_map = salt['grains.filter_by']({
     'Debian': {
       'pkgsuffix': '_amd64.deb',
+      'source_url': 'https://dl.influxdata.com/kapacitor/releases/kapacitor_',
       'source_hash': 'a089e5d14108eb93cefa0f25127a891a',
     },
     'RedHat': {
       'pkgsuffix': '.x86_64.rpm',
+      'source_url': 'https://dl.influxdata.com/kapacitor/releases/kapacitor-',
       'source_hash': 'c3d26ff4ed6464702e750426b4804133',
     }
   }
